@@ -17,7 +17,7 @@ contract BitcoinMinerIncentivesTest is Test {
     function testIncentive() public {
         vm.deal(address(bmi), 0.01 ether);
         bytes memory blockHeader = hex"0000002041e7d147af6a599d289b0e012383f4ebd77663f46547313ec9bb47021d00000075c3823ceb511ba78014706e3bfbf5e1d35c21ac1be74f28fe845fd265df87ffee2b9e66ae77031ec9a60e00";
-        bytes memory minerPubkey = hex"036783b5ca89d7845fa9874685593a980a982d5cdb0e63b80456de91f704b49858";
+        bytes memory minerPubkey = hex"046783b5ca89d7845fa9874685593a980a982d5cdb0e63b80456de91f704b4985854029f23360cb0f9597bc717eae72f055e07e1a5c7253ec9027d11e208b99129";
         
         bytes4 version = hex"02000000";
         bytes memory vin = hex"010000000000000000000000000000000000000000000000000000000000000000ffffffff04034a6306feffffff";

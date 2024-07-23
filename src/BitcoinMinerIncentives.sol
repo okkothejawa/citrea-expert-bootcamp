@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
+import {Test, console} from "forge-std/Test.sol";
 
 import "./IBitcoinLightClient.sol";
 import "bitcoin-spv/solidity/contracts/ValidateSPV.sol";
@@ -56,10 +57,10 @@ contract BitcoinMinerIncentives {
         bytes32 res1;
         bytes32 res2;
         assembly {
-            // Remove the first byte (0x03) from the pubkey
             res1 := mload(add(add(pubkey, 32), 1))
             res2 := mload(add(add(pubkey, 32), 33))
         }
-        return CheckBitcoinSigs.accountFromPubkey(abi.encodePacked(res1, res2));
+        bytes32 hashed = keccak256(abi.encodePacked(res1, res2));
+        return address(uint160(uint256(hashed)));
     }
 }

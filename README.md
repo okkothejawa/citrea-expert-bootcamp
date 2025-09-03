@@ -1,66 +1,89 @@
-## Foundry
+## 1. Better Privacy on Bitcoin
+### Prerequisites
+- MetaMask
+- Foundry
+- Node.js
+- npm
+- yarn
+- nvm
+- Rust
+- circom
+- snarkjs
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Recommended installation:
 
-Foundry consists of:
+```
+# To install MetaMask consult: `https://metamask.io/en-GB/download`
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+# Install Foundry
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 
-## Documentation
+# Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
-https://book.getfoundry.sh/
+# Install Node.js
+nvm install 16
 
-## Usage
+# Install circom
 
-### Build
+# Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-```shell
-$ forge build
+# Install circom
+cd ..
+git clone https://github.com/iden3/circom.git
+cd circom
+cargo build --release
+cargo install --path circom
+cd ..
+
+# Install snarkjs
+npm install -g snarkjs@latest
 ```
 
-### Test
-
-```shell
-$ forge test
+### Steps
+1. Clone Tornado Cash Rebuilt repository.
+```
+cd ..
+git clone https://github.com/ekrembal/tornado-cash-rebuilt.git
 ```
 
-### Format
+2. Consult this repository's README to deploy Tornado Cash on Citrea.
 
-```shell
-$ forge fmt
+3. Clone Tornado Cash UI repository.
+```
+git clone https://github.com/ekrembal/classic-ui.git
 ```
 
-### Gas Snapshots
+4. If you did your own deployment, optionally change `networkConfig.js`'s `5115` part with your own `instanceAddress`, `deployedBlockNumber`, `NOTE_ACCOUNT_BLOCK` and `ENCRYPTED_NOTES_BLOCK`. You can use deployment block number from your deployment output for all three mentioned block numbers.
 
-```shell
-$ forge snapshot
+5. Update `withdraw.wasm` and `withdraw_final.zkey` with your versions from `tornado-cash-rebuilt`.
+
+6. Run the UI on `http://localhost:3000`, or visit `https://citrea-testnet-tornado-cash.netlify.app/` for an already deployed version:
+```
+cd classic-ui
+nvm use
+yarn install
+yarn generate
+yarn dev
 ```
 
-### Anvil
+## 2. Benefiting Miner Economy
+### Prerequisites
+- Foundry
 
-```shell
-$ anvil
+Recommended installation:
+
+```
+# Install Foundry
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
 ```
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+### Steps
+1. Read through `BitcoinMinerIncentives.sol`.
+2. Run tests:
 ```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+forge test
 ```

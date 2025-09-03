@@ -5,7 +5,6 @@ import "bitcoin-spv/solidity/contracts/ValidateSPV.sol";
 import "bitcoin-spv/solidity/contracts/BTCUtils.sol";
 import "bitcoin-spv/solidity/contracts/CheckBitcoinSigs.sol";
 
-
 contract BitcoinMinerIncentives {
     using BTCUtils for bytes;
     using BytesLib for bytes;
@@ -59,9 +58,9 @@ contract BitcoinMinerIncentives {
         require(lightClient.verifyInclusionByTxId(blockHeight, coinbaseTxId, blockHeader, coinbaseTxn.intermediateNodes, 0));
         
         bytes memory output0 = coinbaseTxn.vout.extractOutputAtIndex(0);
-        bytes memory scriptHash = abi.encodePacked(hex"0014", output0.extractHash());
-        bytes memory btcScript = calculateBitcoinScript(minerPubkey);
-        require(keccak256(scriptHash) == keccak256(btcScript), "Miner pubkey does not match the pubkey in the coinbase transaction");
+        bytes memory expectedP2wpkh = abi.encodePacked(hex"0014", output0.extractHash());
+        bytes memory p2wpkh = calculateP2WPKH(minerPubkey);
+        require(keccak256(expectedP2wpkh) == keccak256(p2wpkh), "Miner pubkey does not match the pubkey in the coinbase transaction");
         address miner = calculateEvmAddress(minerPubkey);
         miners[blockHeight] = miner;
 
@@ -144,7 +143,7 @@ contract BitcoinMinerIncentives {
         emit IncentiveForTxRefunded(txId, msg.sender, userIncentive.amount);
     }
 
-    function calculateBitcoinScript(bytes memory pubkey) internal view returns (bytes memory) {
+    function calculateP2WPKH(bytes memory pubkey) internal view returns (bytes memory) {
         return CheckBitcoinSigs.p2wpkhFromPubkey(pubkey);
     }
 

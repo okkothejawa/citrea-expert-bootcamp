@@ -50,16 +50,18 @@ git clone https://github.com/ekrembal/tornado-cash-rebuilt.git
 
 2. Consult this repository's README to deploy Tornado Cash on Citrea.
 
-3. Clone Tornado Cash UI repository, or visit `https://citrea-testnet-tornado-cash.netlify.app/` for an already deployed version:
+3. Get testnet cBTC from `https://citrea.xyz/faucet`. Alternatively, you can use [Garden Finance](https://testnet.garden.finance/) if you have testnet4 BTC and want to have a more authentic experience. Choose `Citrea Bitcoin` as token to receive.
+
+4. Clone Tornado Cash UI repository, or visit `https://citrea-testnet-tornado-cash.netlify.app/` for an already deployed version:
 ```
 git clone https://github.com/ekrembal/classic-ui.git
 ```
 
-4. If you did your own deployment, optionally change `networkConfig.js`'s `5115` part with your own `instanceAddress`, `deployedBlockNumber`, `NOTE_ACCOUNT_BLOCK` and `ENCRYPTED_NOTES_BLOCK`. You can use deployment block number from your deployment output for all three mentioned block numbers.
+5. If you did your own deployment, optionally change `networkConfig.js`'s `5115` part with your own `instanceAddress`, `deployedBlockNumber`, `NOTE_ACCOUNT_BLOCK` and `ENCRYPTED_NOTES_BLOCK`. You can use deployment block number from your deployment output for all three mentioned block numbers.
 
-5. Update `withdraw.wasm` and `withdraw_final.zkey` with your versions from `tornado-cash-rebuilt`.
+6. Update `withdraw.wasm` and `withdraw_final.zkey` with your versions from `tornado-cash-rebuilt`.
 
-6. Run the UI on `http://localhost:3000`:
+7. Run the UI on `http://localhost:3000`:
 ```
 cd classic-ui
 nvm use

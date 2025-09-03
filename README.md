@@ -25,7 +25,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 # Install Node.js
 nvm install 16
 
-# Install circom
 
 # Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -51,7 +50,7 @@ git clone https://github.com/ekrembal/tornado-cash-rebuilt.git
 
 2. Consult this repository's README to deploy Tornado Cash on Citrea.
 
-3. Clone Tornado Cash UI repository.
+3. Clone Tornado Cash UI repository, or visit `https://citrea-testnet-tornado-cash.netlify.app/` for an already deployed version:
 ```
 git clone https://github.com/ekrembal/classic-ui.git
 ```
@@ -60,7 +59,7 @@ git clone https://github.com/ekrembal/classic-ui.git
 
 5. Update `withdraw.wasm` and `withdraw_final.zkey` with your versions from `tornado-cash-rebuilt`.
 
-6. Run the UI on `http://localhost:3000`, or visit `https://citrea-testnet-tornado-cash.netlify.app/` for an already deployed version:
+6. Run the UI on `http://localhost:3000`:
 ```
 cd classic-ui
 nvm use
